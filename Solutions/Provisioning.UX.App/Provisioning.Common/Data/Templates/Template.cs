@@ -126,13 +126,21 @@ namespace Provisioning.Common.Data.Templates
         [XmlAttribute]
         [JsonProperty(PropertyName = "enabled")]
         public bool Enabled { get; set; }
-       
+
         /// <summary>
-        /// Gets or Sets the Template Configuration
+        /// Should policy defined in template be used in favor of the SitePolicy defined in the request
         /// </summary>
         [XmlAttribute]
-        [JsonProperty(PropertyName = "provisioningTemplateContainer")]
-        public string ProvisioningTemplateContainer { get; set; }
+        [JsonProperty(PropertyName = "useTemplateDefinedPolicy")]
+        public bool UseTemplateDefinedPolicy { get; set; }
+        
+
+        ///// <summary>
+        ///// Gets or Sets the Template Configuration
+        ///// </summary>
+        //[XmlAttribute]
+        //[JsonProperty(PropertyName = "provisioningTemplateContainer")]
+        //public string ProvisioningTemplateContainer { get; set; }
 
         [XmlAttribute]
         [JsonProperty(PropertyName = "provisioningTemplate")]

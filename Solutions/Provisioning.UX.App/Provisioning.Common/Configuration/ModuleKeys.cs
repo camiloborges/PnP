@@ -16,5 +16,8 @@ namespace Provisioning.Common.Configuration
         public static readonly string MASTERTEMPLATEPROVIDER_KEY = "MasterTemplateProvider";
         public static readonly string PROVISIONINGCONNECTORS_KEY = "ProvisioningConnectors";
         public static readonly string PROVISIONINGPROVIDER_KEY = "ProvisioningProviders";
+        public static readonly string METADATAMANGER_KEY = "MetadataManager";
+        public static readonly string APPSETTINGSMANAGER_KEY = "AppSettingsManager";
+        public static readonly string SITEEDITMANAGER_KEY = "SiteEditManager";
     }
 }
