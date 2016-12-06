@@ -321,23 +321,15 @@ namespace Provisioning.Extensibility.Providers
             }
 
             redirectUrl = null;
-            bool contextTokenExpired = false;
 
-            try
+            if (SharePointContextProvider.Current.GetSharePointContext(httpContext) != null)
             {
-                if (SharePointContextProvider.Current.GetSharePointContext(httpContext) != null)
-                {
-                    return RedirectionStatus.Ok;
-                }
-            }
-            catch (SecurityTokenExpiredException)
-            {
-                contextTokenExpired = true;
+                return RedirectionStatus.Ok;
             }
 
             const string SPHasRedirectedToSharePointKey = "SPHasRedirectedToSharePoint";
 
-            if (!string.IsNullOrEmpty(httpContext.Request.QueryString[SPHasRedirectedToSharePointKey]) && !contextTokenExpired)
+            if (!string.IsNullOrEmpty(httpContext.Request.QueryString[SPHasRedirectedToSharePointKey]))
             {
                 return RedirectionStatus.CanNotRedirect;
             }
