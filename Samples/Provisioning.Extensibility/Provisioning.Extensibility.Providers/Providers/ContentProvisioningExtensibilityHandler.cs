@@ -348,9 +348,7 @@ namespace Provisioning.Extensibility.Providers
         private void ExtractLibraries(ProvisioningTemplate template, ProvisioningTemplateCreationInformation creationInformation, PnPMonitoredScope scope)
         {
             scope.LogInfo("ContentProvisioniningExtensibilityHandler.ExtractLibraries");
-            var libraries = template.Lists.Where(p => SupportedLibraryTemplateTypes.Contains(p.TemplateType) 
-            && !p.Url.Contains("FiveP") && !p.Url.Contains("Style") && !p.Url.Contains("Icons")
-            );
+            var libraries = template.Lists.Where(p => SupportedLibraryTemplateTypes.Contains(p.TemplateType) );
             foreach (var library in libraries)
             {
                 scope.LogInfo(String.Format("ContentProvisioniningExtensibilityHandler.ExtractLibraries {0}", library.Url));
@@ -369,10 +367,14 @@ namespace Provisioning.Extensibility.Providers
                                                         !p.ServerRelativeUrl.StartsWith(wPath) &&
                                                         !p.ServerRelativeUrl.StartsWith(tPath)
                                                 );
+                var featureTemplate = ProvisioningTemplate.GetPublishingFeatureBaseTemplate();
 
                 foreach (var sourceFile in sourceFiles)
                 {
-                    ExtractFile(sourceFile, template, creationInformation, scope);
+                    if (!featureTemplate.IsFeatureNativeFile(sourceFile.Name))
+                    {
+                        ExtractFile(sourceFile, template, creationInformation, scope);
+                    }
                 }
             }
         }
